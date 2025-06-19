@@ -41,14 +41,28 @@ const doesExist = (username) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-    // Send JSON response with formatted books data
-    res.send(JSON.stringify(books,null,4));
+
+    // adding promise for task 10 - wraps res.send in promise
+    const get_books = new Promise((resolve, reject) => {
+        // Send JSON response with formatted books data
+        resolve(res.send(JSON.stringify({books}, null, 4)));
+        //resolve(res.send(books));
+      });
+
+      get_books.then(() => console.log("Promise for Task 10 resolved"));
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
     const isbn = req.params.isbn;
-    res.send(books[isbn])
+
+    // adding promise for task 11 - wraps res.send in promise
+    const get_books = new Promise((resolve, reject) => {
+        resolve(res.send(books[isbn]));
+        //res.send(books[isbn])
+    });
+
+    get_books.then(() => console.log("Promise for Task 11 resolved"));
  });
   
 // Get book details based on author
@@ -64,7 +78,14 @@ public_users.get('/author/:author',function (req, res) {
     });
     // test URL: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/author/Unknown
     //res.send(JSON.stringify({booksbyauthor}, null, 4));
-    res.send(booksbyauthor); //creates cleaner output in postman
+    //res.send(booksbyauthor); //creates cleaner output in postman
+
+    // adding promise for task 12 - wraps res.send in promise
+    const get_books = new Promise((resolve, reject) => {
+        resolve(res.send(booksbyauthor));
+    });
+
+    get_books.then(() => console.log("Promise for Task 12 resolved"));
   });
 
 // Get all books based on title
@@ -80,7 +101,14 @@ public_users.get('/title/:title',function (req, res) {
     });
     // test URL: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/title/Fairy%20tales
     //res.send(JSON.stringify({booksbytitle}, null, 4));
-    res.send(booksbytitle); //creates cleaner output in postman
+    //res.send(booksbytitle); //creates cleaner output in postman
+
+    // adding promise for task 13 - wraps res.send in promise
+    const get_books = new Promise((resolve, reject) => {
+        resolve(res.send(booksbytitle));
+    });
+
+    get_books.then(() => console.log("Promise for Task 13 resolved"));    
   });
 
 //  Get book review
