@@ -62,7 +62,7 @@ regd_users.post("/login", (req, res) => {
 
 // Add a book review
 // make sure to change to "PUT" before URL on postman
-// test URl: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/auth/review/<isbn>
+// test URl: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/customer/auth/review/<isbn>
 regd_users.put("/auth/review/:isbn", (req, res) => {
     const isbn = req.params.isbn;
     let book = books[isbn];  // Retrieve book object associated with isbn
@@ -70,7 +70,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     if (book) {  
         // Check if book exists
         let review = req.query.review;
-        let reviewer = req.session.authorization['username']
+        let reviewer = req.session.authorization["username"];
 
         // Update review if provided in request body
         if (review) {
@@ -78,7 +78,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
             books[isbn] = book;
         }
 
-        res.send(`Review for the book ${book} updated.`);
+        res.send("Review for the book "+{book}+" updated");
     } else {
         // Respond if book with specified isbn is not found
         res.send("Unable to find book!");
@@ -86,6 +86,9 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
 });
 
 // delete book review
+// make sure to change to "DELETE" before URL on postman
+// test URl: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/customer/auth/review/<isbn>
+
 regd_users.delete("/auth/review/:isbn", (req, res) => {
     const isbn = req.params.isbn + "";
     const username = req.user.data;
