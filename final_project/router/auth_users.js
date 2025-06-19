@@ -32,6 +32,8 @@ const authenticatedUser = (username, password) => {
 }
 
 // Login endpoint
+// make sure to change to "POST" before URL on postman, and user MUST be registered beforehand
+// test URl: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/customer/login
 regd_users.post("/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -59,6 +61,8 @@ regd_users.post("/login", (req, res) => {
 });
 
 // Add a book review
+// make sure to change to "PUT" before URL on postman
+// test URl: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/auth/review/<isbn>
 regd_users.put("/auth/review/:isbn", (req, res) => {
     const isbn = req.params.isbn;
     let book = books[isbn];  // Retrieve book object associated with isbn

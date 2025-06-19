@@ -4,8 +4,10 @@ let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
-
-public_userspost("/register", (req, res) => {
+// add new user
+// make sure to change to "POST" before URL on postman
+// test URl: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/register
+public_users.post("/register", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     // Check if both username and password are provided
@@ -60,7 +62,9 @@ public_users.get('/author/:author',function (req, res) {
                             "reviews":books[isbn]["reviews"]});
       }
     });
-    res.send(JSON.stringify({booksbyauthor}, null, 4));
+    // test URL: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/author/Unknown
+    //res.send(JSON.stringify({booksbyauthor}, null, 4));
+    res.send(booksbyauthor); //creates cleaner output in postman
   });
 
 // Get all books based on title
@@ -74,7 +78,9 @@ public_users.get('/title/:title',function (req, res) {
                             "reviews":books[isbn]["reviews"]});
       }
     });
-    res.send(JSON.stringify({booksbytitle}, null, 4));
+    // test URL: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/title/Fairy%20tales
+    //res.send(JSON.stringify({booksbytitle}, null, 4));
+    res.send(booksbytitle); //creates cleaner output in postman
   });
 
 //  Get book review
@@ -88,7 +94,9 @@ public_users.get('/review/:isbn',function (req, res) {
                             "author":books[isbn]["author"]});
       }
     });
-    res.send(JSON.stringify({booksbyreview}, null, 4));
+    // test URL: https://<username>-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/review/null
+    //res.send(JSON.stringify({booksbyreview}, null, 4));
+    res.send(booksbyreview); //creates cleaner output in postman
   });
 
 module.exports.general = public_users;
